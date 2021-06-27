@@ -18,6 +18,6 @@ class Bomb:
         self.position = Vector2(self.x, self.y)
     
     def draw_bomb(self, Surface):
-        coin_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
-        pygame.draw.rect(Surface, pygame.Color('Red'), coin_rect)
+        bomb_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
+        pygame.draw.rect(Surface, pygame.Color('Red'), bomb_rect)
         # Surface.blit(self.sprite, coin_rect)

@@ -3,6 +3,7 @@ import pygame
 from .Coin import Coin
 from .Snake import Snake
 from .Bomb import Bomb
+from .Rocket import Rocket
 
 cell_size = 16
 cell_number = 50
@@ -12,8 +13,10 @@ class GAME():
         self.coin = Coin()
         self.snake = Snake()
         self.bombs = [Bomb()]
+        self.rockets = []
 
         self.condition = 8
+        self.crowd = 2
         self.count = 0
 
     def update(self):
@@ -24,6 +27,9 @@ class GAME():
         if self.count >= self.condition:
             self.bombs.insert(0, Bomb())
             self.condition += 8
+        if self.count >= self.crowd:
+            self.rockets.insert(0, Rocket())
+            self.condition += 2
 
     def draw_elements(self, screen):
         self.coin.draw_coin(screen)
@@ -31,6 +37,9 @@ class GAME():
 
         for bomb in self.bombs:
             bomb.draw_bomb(screen)
+        
+        for rocket in self.rockets:
+            rocket.draw_rocket(screen)
 
     def check_collision(self):
         if self.coin.position == self.snake.body[0]:

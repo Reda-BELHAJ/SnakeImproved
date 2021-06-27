@@ -1,0 +1,20 @@
+import pygame
+import random
+from pygame.math import Vector2
+
+cell_size = 16
+cell_number = 50
+
+class Rocket:
+    def __init__(self) -> None:
+        self.y = 0
+        self.randomize()
+
+    def randomize(self):
+        self.x = random.randint(0, cell_number - 1)
+        self.y += 1
+        self.position = Vector2(self.x, self.y)
+    
+    def draw_rocket(self, Surface):
+        rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
+        pygame.draw.rect(Surface, pygame.Color('Blue'), rocket_rect)
