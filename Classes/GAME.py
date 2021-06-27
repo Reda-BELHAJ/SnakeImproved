@@ -24,7 +24,6 @@ class GAME():
         if self.count >= self.condition:
             self.bombs.insert(0, Bomb())
             self.condition += 8
-            
 
     def draw_elements(self, screen):
         self.coin.draw_coin(screen)
