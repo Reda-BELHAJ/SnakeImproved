@@ -1,6 +1,6 @@
 import pygame
-from Classes.Coin import Coin
-from Classes.Snake import Snake
+from pygame.math import Vector2
+from Classes.GAME import GAME
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -24,8 +24,7 @@ if __name__ == '__main__':
 
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
-    coin = Coin()
-    snake = Snake()
+    game = GAME()
 
     running = True
 
@@ -37,14 +36,26 @@ if __name__ == '__main__':
                 if event.key == pygame.K_ESCAPE:
                     running = False
                     break
+                if event.key == pygame.K_UP:
+                    if game.snake.direction.y != 1:
+                        game.snake.direction = Vector2(0, -1)
+                if event.key == pygame.K_DOWN:
+                    if game.snake.direction.y != -1:
+                        game.snake.direction = Vector2(0, 1)
+                if event.key == pygame.K_LEFT:
+                    if game.snake.direction.x != 1:
+                        game.snake.direction = Vector2(-1, 0)
+                if event.key == pygame.K_RIGHT:
+                    if game.snake.direction.x != -1:
+                        game.snake.direction = Vector2(1, 0)
+                    
             if event.type == pygame.QUIT:
                 running = False
                 break
             if event.type == SCREEN_UPDATE:
-                snake.move_snake()
+                game.update()
         
-        coin.draw_coin(screen)
-        snake.draw_snake(screen)
+        game.draw_elements(screen)
         
         pygame.display.update()
         pygame.display.flip()
