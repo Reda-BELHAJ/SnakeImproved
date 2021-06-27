@@ -2,8 +2,8 @@ import pygame
 from .Coin import Coin
 from .Snake import Snake
 
-cell_size = 40
-cell_number = 20
+cell_size = 16
+cell_number = 50
 
 class GAME():
     def __init__(self) -> None:

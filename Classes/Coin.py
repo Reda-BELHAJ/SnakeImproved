@@ -2,12 +2,12 @@ import pygame
 import random
 from pygame.math import Vector2
 
-cell_size = 40
-cell_number = 20
+cell_size = 16
+cell_number = 50
 
 class Coin:
     def __init__(self) -> None:
-        self.sprite = pygame.image.load("Assets/gem2.png").convert_alpha()
+        self.sprite = pygame.image.load("Assets/gem.png").convert_alpha()
         self.randomize()
 
     def randomize(self):
