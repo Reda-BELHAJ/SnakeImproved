@@ -14,7 +14,7 @@ class Snake:
     def draw_snake(self, Surface):
         for block in self.body:
             block_rect = pygame.Rect(int(block.x * cell_size), int(block.y * cell_size), cell_size, cell_size)
-            pygame.draw.rect(Surface, pygame.Color('Blue'), block_rect)
+            pygame.draw.rect(Surface, pygame.Color('Green'), block_rect)
 
     def move_snake(self):
         if self.new_block:
