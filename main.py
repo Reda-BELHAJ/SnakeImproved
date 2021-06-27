@@ -5,6 +5,8 @@ from Classes.Snake import Snake
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
 
+SCREEN_UPDATE = pygame.USEREVENT
+
 GREY = (64, 64, 64)
 RED = (128, 0, 0)
 WHITE = (255, 255, 255)
@@ -20,13 +22,15 @@ if __name__ == '__main__':
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
 
+    pygame.time.set_timer(SCREEN_UPDATE, 150)
+
     coin = Coin()
     snake = Snake()
 
     running = True
 
     while running:
-        clock.tick(60)
+        screen.fill(BLACK)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -36,10 +40,15 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
                 break
+            if event.type == SCREEN_UPDATE:
+                snake.move_snake()
         
         coin.draw_coin(screen)
         snake.draw_snake(screen)
         
+        pygame.display.update()
         pygame.display.flip()
+
+        clock.tick(60)
 
     pygame.quit()
