@@ -1,4 +1,6 @@
 import pygame
+from Classes.Coin import Coin
+from Classes.Snake import Snake
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -18,7 +20,8 @@ if __name__ == '__main__':
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
 
-    getTicksLastFrame = 0
+    coin = Coin()
+    snake = Snake()
 
     running = True
 
@@ -33,6 +36,9 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
                 break
+        
+        coin.draw_coin(screen)
+        snake.draw_snake(screen)
         
         pygame.display.flip()
 
