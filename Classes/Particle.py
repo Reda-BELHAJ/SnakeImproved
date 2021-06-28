@@ -8,7 +8,7 @@ cell_number = 38
 class Particle:
     def __init__(self, x, y) -> None:
         self.position = Vector2(x * cell_size, y * cell_size)
-        self.position_vel = Vector2(random.randrange(0, 40) /10 - 1, random.randrange(0, 40) /10 - 1)
+        self.position_vel = Vector2(random.randrange(0, 30) /10 - 1, random.randrange(0, 30) /10 - 1)
         self.radius = random.randint(1, 4)
         self.lifetime = 0
 
