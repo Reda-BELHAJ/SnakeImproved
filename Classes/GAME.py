@@ -3,9 +3,12 @@ from .Coin import Coin
 from .Snake import Snake, Block
 from .Bomb import Bomb
 from .Rocket import Rocket
+from .Particle import Particle
 
 cell_size = 16
 cell_number = 38
+
+particles_anim =  lambda block :[Particle(block.x, block.y)] * 10
 
 class GAME():
     def __init__(self) -> None:
@@ -15,8 +18,8 @@ class GAME():
         self.rockets = []
         self.particles = []
 
-        self.condition = 8
-        self.crowd = 2
+        self.condition = 1
+        self.crowd = 0
         self.count = 0
 
         self.game_timer = 0
@@ -24,7 +27,7 @@ class GAME():
         # self.acc = 0.1
         # self.difficulty = 0
 
-    def update(self):
+    def update(self ,screen):
         self.snake.move_snake()
         self.check_collision()
         self.check_fail()
@@ -36,6 +39,7 @@ class GAME():
                 self.game_timer = 0
                 self.rockets.append(Rocket())
 
+
     def draw_elements(self, screen):
         # self.draw_grass(screen)
         self.coin.draw_coin(screen)
@@ -44,7 +48,7 @@ class GAME():
 
         if self.count >= self.condition:
             self.bombs.insert(0, Bomb())
-            self.condition += 8
+            self.condition += 1
 
         for bomb in self.bombs:
             bomb.draw_bomb(screen)
@@ -69,7 +73,6 @@ class GAME():
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
                     self.snake.remove_block(i)
-                    # Particle
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:

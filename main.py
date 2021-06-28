@@ -56,7 +56,7 @@ if __name__ == '__main__':
                 running = False
                 break
             if event.type == SCREEN_UPDATE:
-                game.update()
+                game.update(display)
         
         game.draw_elements(display)
         screen.blit(display, (100, 100))
