@@ -74,7 +74,8 @@ class GAME():
                     self.anim_pos[0] = Vector2(block.x, block.y)
             
             for bomb in self.bombs:
-                if bomb.bomb_rect.colliderect(rocket.rocket_rect):
+                if bomb.bomb_rect.colliderect(rocket.rocket_rect): 
+                    # Collision just the bottom 
                     self.bombs.remove(bomb)
                     self.anim_pos[1] = bomb.position
 
