@@ -63,6 +63,11 @@ class GAME():
         for bomb in self.bombs:
             if bomb.position == self.snake.body[0]:
                 self.game_over()
+            
+        for rocket in self.rockets:
+            for i, block in enumerate(self.snake.body[:-1]):
+                if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
+                    print("aouch")
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
