@@ -36,6 +36,7 @@ class GAME():
                 self.rockets.append(Rocket())
 
     def draw_elements(self, screen):
+        # self.draw_grass(screen)
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()
@@ -50,11 +51,17 @@ class GAME():
         for rocket in self.rockets:
             rocket.draw_rocket(screen)
 
+    def check_position(self):
+        for bomb in self.bombs:
+            if self.coin.position != bomb.position:
+                self.coin.randomize()
+            else:
+                self.check_position()
 
     def check_collision(self):
         if self.coin.position == self.snake.body[0]:
             self.count += 1
-            self.coin.randomize()
+            self.check_position()
             self.snake.add_block()
 
         for rocket in self.rockets:
@@ -78,6 +85,19 @@ class GAME():
             if bomb.position == self.snake.body[0]:
                 self.game_over()
                     
+    # def draw_grass(self, Surface):
+    #     DARKER_GREEN = (19, 61, 30)
+    #     for row in range(cell_number):
+    #         if row % 2 == 0:
+    #             for col in range(cell_number):
+    #                 if col % 2 == 0:
+    #                     grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
+    #                     pygame.draw.rect(Surface, DARKER_GREEN, grass_rect)
+    #         else:
+    #             for col in range(cell_number):
+    #                 if col % 2 == 1:
+    #                     grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
+    #                     pygame.draw.rect(Surface, DARKER_GREEN, grass_rect)
 
     def game_over(self):
         pygame.quit()

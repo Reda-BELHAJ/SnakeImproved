@@ -11,7 +11,7 @@ GREY = (64, 64, 64)
 RED = (128, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
-DARK_YELLOW = (128, 128, 0)
+DARK_GREEN = (25, 89, 42)
 BLACK = (0, 0, 0)
 
 if __name__ == '__main__':
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     while running:
         screen.fill(BLACK)
-        display.fill(WHITE)
+        display.fill(DARK_GREEN)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
