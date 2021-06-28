@@ -27,9 +27,10 @@ class GAME():
         if self.count >= self.condition:
             self.bombs.insert(0, Bomb())
             self.condition += 8
+
         if self.count >= self.crowd:
             self.rockets.insert(0, Rocket())
-            self.condition += 2
+            self.crowd += 2
 
     def draw_elements(self, screen):
         self.coin.draw_coin(screen)
@@ -39,6 +40,7 @@ class GAME():
             bomb.draw_bomb(screen)
         
         for rocket in self.rockets:
+            rocket.move()
             rocket.draw_rocket(screen)
 
     def check_collision(self):
