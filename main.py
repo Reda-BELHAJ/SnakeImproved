@@ -67,7 +67,7 @@ if __name__ == '__main__':
         if game.anim_pos != Vector2(-1,-1) :
             particles_anim.append(Particle(game.anim_pos.x, game.anim_pos.y))
             timer += 1
-            if timer < 20:
+            if timer < 30:
                 for particle in particles_anim:
                     particle.draw(display)
                     if particle.radius <= 0:
