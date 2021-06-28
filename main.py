@@ -61,7 +61,6 @@ if __name__ == '__main__':
         game.draw_elements(display)
         screen.blit(display, (100, 100))
         
-        
         pygame.display.update()
         pygame.display.flip()
 

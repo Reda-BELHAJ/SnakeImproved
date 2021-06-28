@@ -50,6 +50,7 @@ class GAME():
         for rocket in self.rockets:
             rocket.draw_rocket(screen)
 
+
     def check_collision(self):
         if self.coin.position == self.snake.body[0]:
             self.count += 1
@@ -57,17 +58,9 @@ class GAME():
             self.snake.add_block()
 
         for rocket in self.rockets:
-            if rocket.rocket_rect.colliderect(Block(self.snake.body[0].x, self.snake.body[0].y).rect):
-                self.game_over()
-
-        for bomb in self.bombs:
-            if bomb.position == self.snake.body[0]:
-                self.game_over()
-            
-        for rocket in self.rockets:
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
-                    print("aouch")
+                    self.snake.remove_block(i)
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
@@ -76,6 +69,15 @@ class GAME():
         for block in self.snake.body[1:] :
             if block == self.snake.body[0]:
                 self.game_over()
+
+        for rocket in self.rockets:
+            if rocket.rocket_rect.colliderect(Block(self.snake.body[0].x, self.snake.body[0].y).rect):
+                self.game_over()
+
+        for bomb in self.bombs:
+            if bomb.position == self.snake.body[0]:
+                self.game_over()
+                    
 
     def game_over(self):
         pygame.quit()
