@@ -8,7 +8,7 @@ from .Particle import Particle
 cell_size = 16
 cell_number = 38
 
-particles_anim =  lambda block :[Particle(block.x, block.y)] * 10
+particles_anim =  lambda block :[Particle(block.x, block.y)] * 20
 
 class GAME():
     def __init__(self) -> None:
@@ -27,7 +27,7 @@ class GAME():
         # self.acc = 0.1
         # self.difficulty = 0
 
-    def update(self ,screen):
+    def update(self):
         self.snake.move_snake()
         self.check_collision()
         self.check_fail()
@@ -56,6 +56,9 @@ class GAME():
         for rocket in self.rockets:
             rocket.draw_rocket(screen)
 
+        for particle in self.particles:
+            particle.draw(screen)
+
     def check_position(self):
         for bomb in self.bombs:
             if self.coin.position != bomb.position:
@@ -73,6 +76,7 @@ class GAME():
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
                     self.snake.remove_block(i)
+                    self.particles = particles_anim(block)
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
