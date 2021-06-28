@@ -3,12 +3,12 @@ import random
 from pygame.math import Vector2
 
 cell_size = 16
-cell_number = 25
+cell_number = 38
 
 class Rocket:
     def __init__(self) -> None:
         self.randomize()
-        self.acc = 0.1
+        self.acc = 0.05
 
     def randomize(self):
         self.x = random.randint(0, cell_number - 1)

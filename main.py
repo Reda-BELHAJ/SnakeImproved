@@ -19,7 +19,7 @@ if __name__ == '__main__':
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-    display = pygame.Surface((SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
+    display = pygame.Surface((608, 608))
 
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
@@ -60,7 +60,7 @@ if __name__ == '__main__':
         
         game.draw_elements(display)
         
-        screen.blit(display, (0, 0))
+        screen.blit(display, (100, 100))
         pygame.display.update()
         pygame.display.flip()
 

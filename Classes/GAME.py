@@ -1,4 +1,3 @@
-from Classes.Bomb import Bomb
 import pygame
 from .Coin import Coin
 from .Snake import Snake
@@ -6,7 +5,7 @@ from .Bomb import Bomb
 from .Rocket import Rocket
 
 cell_size = 16
-cell_number = 25
+cell_number = 38
 
 class GAME():
     def __init__(self) -> None:

@@ -3,7 +3,7 @@ import random
 from pygame.math import Vector2
 
 cell_size = 16
-cell_number = 25
+cell_number = 38
 
 class Snake:
     def __init__(self) -> None:
