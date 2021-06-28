@@ -13,8 +13,8 @@ class Coin:
         self.randomize()
 
     def randomize(self):
-        self.x = random.randint(0, cell_number - 1)
-        self.y = random.randint(0, cell_number - 1)
+        self.x = random.randint(0, cell_number - 2)
+        self.y = random.randint(0, cell_number - 2)
         self.position = Vector2(self.x, self.y)
     
     def draw_coin(self, Surface):

@@ -1,6 +1,6 @@
 import pygame
 from .Coin import Coin
-from .Snake import Snake
+from .Snake import Snake, Block
 from .Bomb import Bomb
 from .Rocket import Rocket
 
@@ -21,6 +21,7 @@ class GAME():
         self.game_timer = 0
 
         # self.acc = 0.1
+        # self.difficulty = 0
 
     def update(self):
         self.snake.move_snake()
@@ -54,6 +55,10 @@ class GAME():
             self.count += 1
             self.coin.randomize()
             self.snake.add_block()
+
+        for rocket in self.rockets:
+            if rocket.rocket_rect.colliderect(Block(self.snake.body[0].x, self.snake.body[0].y).rect):
+                self.game_over()
 
         for bomb in self.bombs:
             if bomb.position == self.snake.body[0]:

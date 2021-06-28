@@ -5,6 +5,10 @@ from pygame.math import Vector2
 cell_size = 16
 cell_number = 38
 
+class Block:
+    def __init__(self, x, y) -> None:
+        self.rect = pygame.Rect(int(x * cell_size), int(y * cell_size), cell_size, cell_size)
+
 class Snake:
     def __init__(self) -> None:
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
@@ -13,13 +17,15 @@ class Snake:
     
     def draw_snake(self, Surface):
         for block in self.body:
-            block_rect = pygame.Rect(int(block.x * cell_size), int(block.y * cell_size), cell_size, cell_size)
+            block_rect = Block(block.x, block.y).rect
             pygame.draw.rect(Surface, pygame.Color('Green'), block_rect)
+            
 
     def move_snake(self):
         if self.new_block:
             body_copy = self.body[:]
             self.new_block = False
+            
         else:
             body_copy = self.body[:-1]
 
