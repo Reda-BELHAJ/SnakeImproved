@@ -13,6 +13,7 @@ class GAME():
         self.snake = Snake()
         self.bombs = [Bomb()]
         self.rockets = []
+        self.particles = []
 
         self.condition = 8
         self.crowd = 2
@@ -68,6 +69,7 @@ class GAME():
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
                     self.snake.remove_block(i)
+                    # Particle
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
