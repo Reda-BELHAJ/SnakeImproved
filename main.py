@@ -75,6 +75,7 @@ if __name__ == '__main__':
             else:
                 timer = 0
                 game.anim_pos = Vector2(-1,-1)
+                particles_anim = []
 
         screen.blit(display, (100, 100))
         
