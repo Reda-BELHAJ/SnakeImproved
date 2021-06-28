@@ -22,4 +22,5 @@ class Rocket:
     def draw_rocket(self, Surface):
         self.move()
         self.rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
+        self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
         pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)

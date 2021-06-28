@@ -85,6 +85,9 @@ if __name__ == '__main__':
         if game.anim_pos[1] != Vector2(-1,-1) :
             timer, particles_anim = animate(timer, particles_anim, 1, pygame.Color('Red'))
 
+        # Collision with the small box in rocket with the snake 
+        # le trou: Feature
+
         screen.blit(display, (100, 100))
         
         pygame.display.update()

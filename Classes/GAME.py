@@ -48,11 +48,11 @@ class GAME():
             self.bombs.insert(0, Bomb())
             self.condition = self.condition * 2
 
-        for bomb in self.bombs:
-            bomb.draw_bomb(screen)
-        
         for rocket in self.rockets:
             rocket.draw_rocket(screen)
+
+        for bomb in self.bombs:
+            bomb.draw_bomb(screen)
 
     def check_position(self):
         for bomb in self.bombs:
@@ -74,8 +74,7 @@ class GAME():
                     self.anim_pos[0] = Vector2(block.x, block.y)
             
             for bomb in self.bombs:
-                if bomb.bomb_rect.colliderect(rocket.rocket_rect): 
-                    # Collision just the bottom 
+                if bomb.bomb_rect.colliderect(rocket.small_rect):  
                     self.bombs.remove(bomb)
                     self.anim_pos[1] = bomb.position
 
