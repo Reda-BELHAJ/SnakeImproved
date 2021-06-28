@@ -3,12 +3,10 @@ from .Coin import Coin
 from .Snake import Snake, Block
 from .Bomb import Bomb
 from .Rocket import Rocket
-from .Particle import Particle
+from pygame.math import Vector2
 
 cell_size = 16
 cell_number = 38
-
-particles_anim =  lambda block :[Particle(block.x, block.y)] * 20
 
 class GAME():
     def __init__(self) -> None:
@@ -16,11 +14,11 @@ class GAME():
         self.snake = Snake()
         self.bombs = [Bomb()]
         self.rockets = []
-        self.particles = []
 
         self.condition = 1
         self.crowd = 0
         self.count = 0
+        self.anim_pos = Vector2(-1,-1)
 
         self.game_timer = 0
 
@@ -39,7 +37,6 @@ class GAME():
                 self.game_timer = 0
                 self.rockets.append(Rocket())
 
-
     def draw_elements(self, screen):
         # self.draw_grass(screen)
         self.coin.draw_coin(screen)
@@ -55,9 +52,6 @@ class GAME():
         
         for rocket in self.rockets:
             rocket.draw_rocket(screen)
-
-        for particle in self.particles:
-            particle.draw(screen)
 
     def check_position(self):
         for bomb in self.bombs:
@@ -76,7 +70,7 @@ class GAME():
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
                     self.snake.remove_block(i)
-                    self.particles = particles_anim(block)
+                    self.anim_pos = Vector2(block.x, block.y)
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:

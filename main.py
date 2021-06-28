@@ -1,6 +1,7 @@
 import pygame
 from pygame.math import Vector2
 from Classes.GAME import GAME
+from Classes.Particle import Particle
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -27,6 +28,9 @@ if __name__ == '__main__':
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     game = GAME()
+    particles_anim =  []
+
+    timer = 0
 
     running = True
 
@@ -57,8 +61,21 @@ if __name__ == '__main__':
                 break
             if event.type == SCREEN_UPDATE:
                 game.update()
-        
+
         game.draw_elements(display)
+
+        if game.anim_pos != Vector2(-1,-1) :
+            particles_anim.append(Particle(game.anim_pos.x, game.anim_pos.y))
+            timer += 1
+            if timer < 20:
+                for particle in particles_anim:
+                    particle.draw(display)
+                    if particle.radius <= 0:
+                        particles_anim.remove(particle)
+            else:
+                timer = 0
+                game.anim_pos = Vector2(-1,-1)
+
         screen.blit(display, (100, 100))
         
         pygame.display.update()
