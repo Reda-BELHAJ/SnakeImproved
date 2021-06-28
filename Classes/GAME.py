@@ -6,7 +6,7 @@ from .Bomb import Bomb
 from .Rocket import Rocket
 
 cell_size = 16
-cell_number = 50
+cell_number = 25
 
 class GAME():
     def __init__(self) -> None:

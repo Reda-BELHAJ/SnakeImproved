@@ -5,7 +5,7 @@ from pygame.math import Vector2
 image = "blue_gem.png"
 
 cell_size = 16
-cell_number = 50
+cell_number = 25
 
 class Coin:
     def __init__(self) -> None:

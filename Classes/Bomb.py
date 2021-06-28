@@ -5,7 +5,7 @@ from pygame.math import Vector2
 image = "bomb.png"
 
 cell_size = 16
-cell_number = 50
+cell_number = 25
 
 class Bomb:
     def __init__(self) -> None:

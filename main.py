@@ -19,6 +19,8 @@ if __name__ == '__main__':
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
+    display = pygame.Surface((SCREEN_WIDTH/2, SCREEN_HEIGHT/2))
+
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
 
@@ -30,6 +32,7 @@ if __name__ == '__main__':
 
     while running:
         screen.fill(BLACK)
+        display.fill(WHITE)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -55,8 +58,9 @@ if __name__ == '__main__':
             if event.type == SCREEN_UPDATE:
                 game.update()
         
-        game.draw_elements(screen)
+        game.draw_elements(display)
         
+        screen.blit(display, (0, 0))
         pygame.display.update()
         pygame.display.flip()
 
