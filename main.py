@@ -15,6 +15,21 @@ YELLOW = (255, 255, 0)
 DARK_GREEN = (25, 89, 42)
 BLACK = (0, 0, 0)
 
+def animate(timer, particles_anim, index, color):
+    particles_anim.append(Particle(game.anim_pos[index].x, game.anim_pos[index].y, color))
+    timer += 1
+    if timer < 30:
+        for particle in particles_anim:
+            particle.draw(display)
+            if particle.radius <= 0:
+                particles_anim.remove(particle)
+    else:
+        timer = 0
+        game.anim_pos[index] = Vector2(-1,-1)
+        particles_anim = []
+    
+    return timer, particles_anim
+
 if __name__ == '__main__':
     
     pygame.init()
@@ -64,18 +79,11 @@ if __name__ == '__main__':
 
         game.draw_elements(display)
 
-        if game.anim_pos != Vector2(-1,-1) :
-            particles_anim.append(Particle(game.anim_pos.x, game.anim_pos.y))
-            timer += 1
-            if timer < 30:
-                for particle in particles_anim:
-                    particle.draw(display)
-                    if particle.radius <= 0:
-                        particles_anim.remove(particle)
-            else:
-                timer = 0
-                game.anim_pos = Vector2(-1,-1)
-                particles_anim = []
+        if game.anim_pos[0] != Vector2(-1,-1) :
+            timer, particles_anim = animate(timer, particles_anim, 0, pygame.Color('Green'))
+
+        if game.anim_pos[1] != Vector2(-1,-1) :
+            timer, particles_anim = animate(timer, particles_anim, 1, pygame.Color('Red'))
 
         screen.blit(display, (100, 100))
         

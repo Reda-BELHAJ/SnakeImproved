@@ -15,10 +15,11 @@ class GAME():
         self.bombs = [Bomb()]
         self.rockets = []
 
-        self.condition = 1
-        self.crowd = 0
+        self.condition = 4
+        self.crowd = 2
         self.count = 0
-        self.anim_pos = Vector2(-1,-1)
+
+        self.anim_pos = [Vector2(-1,-1), Vector2(-1,-1)]
 
         self.game_timer = 0
 
@@ -45,7 +46,7 @@ class GAME():
 
         if self.count >= self.condition:
             self.bombs.insert(0, Bomb())
-            self.condition += 1
+            self.condition = self.condition * 2
 
         for bomb in self.bombs:
             bomb.draw_bomb(screen)
@@ -70,7 +71,13 @@ class GAME():
             for i, block in enumerate(self.snake.body[:-1]):
                 if rocket.rocket_rect.colliderect(Block(block.x, block.y).rect):
                     self.snake.remove_block(i)
-                    self.anim_pos = Vector2(block.x, block.y)
+                    self.anim_pos[0] = Vector2(block.x, block.y)
+            
+            for bomb in self.bombs:
+                if bomb.bomb_rect.colliderect(rocket.rocket_rect):
+                    self.bombs.remove(bomb)
+                    self.anim_pos[1] = bomb.position
+
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
