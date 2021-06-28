@@ -20,5 +20,6 @@ class Rocket:
         self.position = Vector2(self.x, self.y)
     
     def draw_rocket(self, Surface):
+        self.move()
         rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
         pygame.draw.rect(Surface, pygame.Color('Blue'), rocket_rect)
