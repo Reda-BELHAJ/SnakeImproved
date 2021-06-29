@@ -10,6 +10,7 @@ cell_number = 38
 
 class GAME():
     def __init__(self) -> None:
+        self.playing = False
         self.coin = Coin()
         self.snake = Snake()
         self.bombs = [Bomb()]
@@ -19,7 +20,7 @@ class GAME():
         self.crowd = 2
         self.count = 0
 
-        self.anim_pos = [Vector2(-1,-1), Vector2(-1,-1)]
+        self.anim_pos = [Vector2(-1,-1), Vector2(-1,-1), Vector2(-1,-1)]
 
         self.game_timer = 0
 
@@ -74,9 +75,15 @@ class GAME():
                     self.anim_pos[0] = Vector2(block.x, block.y)
             
             for bomb in self.bombs:
-                if bomb.bomb_rect.colliderect(rocket.small_rect):  
-                    self.bombs.remove(bomb)
+                if bomb.bomb_rect.colliderect(rocket.small_rect):
                     self.anim_pos[1] = bomb.position
+                    if len(self.bombs) > 1 :
+                        self.bombs.remove(bomb)
+                    else:
+                        bomb.randomize()
+            if rocket.rocket_rect.colliderect(self.coin.coin_rect):
+                self.anim_pos[2] = Vector2(self.coin.x, self.coin.y)
+                self.coin.randomize()
 
 
     def check_fail(self):
