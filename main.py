@@ -87,6 +87,7 @@ if __name__ == '__main__':
 
         # Collision with the small box in rocket with the snake 
         # le trou: Feature
+        # UI
 
         screen.blit(display, (100, 100))
         
