@@ -14,6 +14,10 @@ class GAME():
     def __init__(self) -> None:
         self.playing = False
         self.coin = Coin()
+
+        self.moving_coin = pygame.sprite.Group()
+        self.moving_coin.add(self.coin)
+
         self.snake = Snake()
         self.bombs = [Bomb()]
         self.rockets = []
