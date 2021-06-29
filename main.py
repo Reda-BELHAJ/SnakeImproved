@@ -17,8 +17,8 @@ DARK_GREEN = (25, 89, 42)
 BLACK = (0, 0, 0)
 
 
-def animate(timer, particles_anim, index, color):
-    particles_anim.append(Particle(game.anim_pos[index].x, game.anim_pos[index].y, color))
+def animate(timer, particles_anim, index):
+    particles_anim.append(Particle(game.anim_pos[index].x, game.anim_pos[index].y, colors[index]))
     timer += 1
     if timer < 30:
         for particle in particles_anim:
@@ -42,13 +42,15 @@ if __name__ == '__main__':
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
 
-    font = pygame.font.SysFont(None, 20)
+    font = pygame.font.SysFont(None, 30)
 
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     menu = Menu(font, "main menu", WHITE)
     game = GAME()
+
     particles_anim =  []
+    colors = [pygame.Color('Green'), pygame.Color('Red'), pygame.Color('Gold')]
 
     timer = 0
 
@@ -57,7 +59,7 @@ if __name__ == '__main__':
     while running:
         screen.fill(BLACK)
 
-        menu.draw_text(20, 20, screen)
+        menu.draw_text(40, 40, screen)
 
         pygame.display.update()
         pygame.display.flip()
@@ -72,51 +74,51 @@ if __name__ == '__main__':
                         break
                 if event.key == pygame.K_RETURN:
                     game.playing = True
+                    running = False
+                    break
 
-        while game.playing:
-            clock.tick(60)
-            screen.fill(BLACK)
-            display.fill(DARK_GREEN)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
+    while game.playing:
+        clock.tick(60)
+        screen.fill(BLACK)
+        display.fill(DARK_GREEN)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                game.playing = False
+                break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
                     running = False
                     game.playing = False
                     break
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        running = False
-                        game.playing = False
-                        break
-                    if event.key == pygame.K_UP:
-                        if game.snake.direction.y != 1:
-                            game.snake.direction = Vector2(0, -1)
-                    if event.key == pygame.K_DOWN:
-                        if game.snake.direction.y != -1:
-                            game.snake.direction = Vector2(0, 1)
-                    if event.key == pygame.K_LEFT:
-                        if game.snake.direction.x != 1:
-                            game.snake.direction = Vector2(-1, 0)
-                    if event.key == pygame.K_RIGHT:
-                        if game.snake.direction.x != -1:
-                            game.snake.direction = Vector2(1, 0)
-                        
-                if event.type == SCREEN_UPDATE:
-                    game.update()
+                if event.key == pygame.K_UP:
+                    if game.snake.direction.y != 1:
+                        game.snake.direction = Vector2(0, -1)
+                if event.key == pygame.K_DOWN:
+                    if game.snake.direction.y != -1:
+                        game.snake.direction = Vector2(0, 1)
+                if event.key == pygame.K_LEFT:
+                    if game.snake.direction.x != 1:
+                        game.snake.direction = Vector2(-1, 0)
+                if event.key == pygame.K_RIGHT:
+                    if game.snake.direction.x != -1:
+                        game.snake.direction = Vector2(1, 0)
+                    
+            if event.type == SCREEN_UPDATE:
+                game.update()
 
-            game.draw_elements(display)
+        game.draw_elements(display)
 
-            if game.anim_pos[0] != Vector2(-1,-1) :
-                timer, particles_anim = animate(timer, particles_anim, 0, pygame.Color('Green'))
+        for i, anim in enumerate(game.anim_pos):
+            if anim != Vector2(-1,-1) :
+                timer, particles_anim = animate(timer, particles_anim, i)
 
-            if game.anim_pos[1] != Vector2(-1,-1) :
-                timer, particles_anim = animate(timer, particles_anim, 1, pygame.Color('Red'))
+        # le trou: Feature
+        # UI
 
-            # le trou: Feature
-            # UI
-
-            screen.blit(display, (100, 100))
-            
-            pygame.display.update()
-            pygame.display.flip()
+        screen.blit(display, (100, 100))
+        
+        pygame.display.update()
+        pygame.display.flip()
 
     pygame.quit()
