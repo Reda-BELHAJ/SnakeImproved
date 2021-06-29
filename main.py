@@ -46,7 +46,7 @@ if __name__ == '__main__':
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     menu = Menu(font, "main menu", WHITE)
-    game = GAME()
+    game = GAME(1)
 
     particles_anim =  []
     colors = [DARK_GREEN, pygame.Color('Red'), pygame.Color('Gold')]
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     while game.playing:
         clock.tick(60)
         screen.fill(BLACK)
-        # display.fill(LIGHT_GREEN)
+        display.fill(LIGHT_GREEN)
 
         if game.game_over:
             break

@@ -11,15 +11,20 @@ cell_number = 38
 sprite_cell = pygame.image.load("Assets/Cell.png")
 
 class GAME():
-    def __init__(self) -> None:
+    def __init__(self, mode) -> None:
         self.playing = False
-        self.coin = Coin()
+
+        self.mode = mode
+        # Classic mode 
+        # Colorfull mode with assets etc
+
+        self.coin = Coin(self.mode)
 
         self.moving_coin = pygame.sprite.Group()
         self.moving_coin.add(self.coin)
 
-        self.snake = Snake()
-        self.bombs = [Bomb()]
+        self.snake = Snake(self.mode)
+        self.bombs = [Bomb(self.mode)]
         self.rockets = []
 
         self.condition = 4
@@ -45,16 +50,17 @@ class GAME():
             self.game_timer += 1
             if self.game_timer > 50:
                 self.game_timer = 0
-                self.rockets.append(Rocket())
+                self.rockets.append(Rocket(self.mode))
 
     def draw_elements(self, screen):
-        self.draw_grass(screen)
+        if self.mode == 0:
+            self.draw_grass(screen)
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()
 
         if self.count >= self.condition:
-            self.bombs.insert(0, Bomb())
+            self.bombs.insert(0, Bomb(self.mode))
             self.condition = self.condition * 2
 
         for rocket in self.rockets:

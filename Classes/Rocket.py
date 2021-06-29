@@ -6,7 +6,8 @@ cell_size = 16
 cell_number = 38
 
 class Rocket:
-    def __init__(self) -> None:
+    def __init__(self, mode) -> None:
+        self.mode = mode
         self.randomize()
         self.acc = 0.05
 
@@ -23,4 +24,9 @@ class Rocket:
         self.move()
         self.rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
         self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
-        pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
+
+        if self.mode == 0:
+            pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
+        elif self.mode == 1:
+            pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
+            # It has to go blood

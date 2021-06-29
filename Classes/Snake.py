@@ -11,7 +11,8 @@ class Block:
         self.rect = pygame.Rect(int(x * cell_size), int(y * cell_size), cell_size, cell_size)
 
 class Snake:
-    def __init__(self) -> None:
+    def __init__(self, mode) -> None:
+        self.mode = mode
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(1, 0)
 
@@ -23,7 +24,11 @@ class Snake:
             b = Block(block.x, block.y)
             block_rect = b.rect
             # pygame.draw.rect(Surface, pygame.Color('Green'), block_rect)
-            Surface.blit(b.sprite, block_rect)
+            if self.mode == 0:
+                Surface.blit(b.sprite, block_rect)
+            elif self.mode == 1:
+                Surface.blit(b.sprite, block_rect)
+                # It has to go blood
             
 
     def move_snake(self):
