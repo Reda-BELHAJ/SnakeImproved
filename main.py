@@ -13,7 +13,7 @@ GREY = (64, 64, 64)
 RED = (128, 0, 0)
 WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
-DARK_GREEN = (25, 89, 42)
+DARK_GREEN = (63, 70, 39)
 BLACK = (0, 0, 0)
 
 
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     game = GAME()
 
     particles_anim =  []
-    colors = [pygame.Color('Green'), pygame.Color('Red'), pygame.Color('Gold')]
+    colors = [DARK_GREEN, pygame.Color('Red'), pygame.Color('Gold')]
 
     timer = 0
 

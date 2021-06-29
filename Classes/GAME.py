@@ -8,6 +8,8 @@ from pygame.math import Vector2
 cell_size = 16
 cell_number = 38
 
+sprite_cell = pygame.image.load("Assets/Cell.png")
+
 class GAME():
     def __init__(self) -> None:
         self.playing = False
@@ -40,7 +42,7 @@ class GAME():
                 self.rockets.append(Rocket())
 
     def draw_elements(self, screen):
-        # self.draw_grass(screen)
+        self.draw_grass(screen)
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()
@@ -102,19 +104,11 @@ class GAME():
             if bomb.position == self.snake.body[0]:
                 self.game_over()
                     
-    # def draw_grass(self, Surface):
-    #     DARKER_GREEN = (19, 61, 30)
-    #     for row in range(cell_number):
-    #         if row % 2 == 0:
-    #             for col in range(cell_number):
-    #                 if col % 2 == 0:
-    #                     grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
-    #                     pygame.draw.rect(Surface, DARKER_GREEN, grass_rect)
-    #         else:
-    #             for col in range(cell_number):
-    #                 if col % 2 == 1:
-    #                     grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
-    #                     pygame.draw.rect(Surface, DARKER_GREEN, grass_rect)
+    def draw_grass(self, Surface):
+        for row in range(cell_number):
+            for col in range(cell_number):
+                grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
+                Surface.blit(sprite_cell, grass_rect)
 
     def game_over(self):
         pygame.quit()
