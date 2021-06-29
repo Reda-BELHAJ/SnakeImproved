@@ -81,6 +81,10 @@ if __name__ == '__main__':
         clock.tick(60)
         screen.fill(BLACK)
         display.fill(DARK_GREEN)
+
+        if game.game_over:
+            break
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False

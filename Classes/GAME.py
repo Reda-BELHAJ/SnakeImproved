@@ -26,6 +26,8 @@ class GAME():
 
         self.game_timer = 0
 
+        self.game_over = False
+
         # self.acc = 0.1
         # self.difficulty = 0
 
@@ -90,25 +92,22 @@ class GAME():
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
-            self.game_over()
+            self.game_over = True
         
         for block in self.snake.body[1:] :
             if block == self.snake.body[0]:
-                self.game_over()
+                self.game_over = True
 
         for rocket in self.rockets:
             if rocket.rocket_rect.colliderect(Block(self.snake.body[0].x, self.snake.body[0].y).rect):
-                self.game_over()
+                self.game_over = True
 
         for bomb in self.bombs:
             if bomb.position == self.snake.body[0]:
-                self.game_over()
+                self.game_over = True
                     
     def draw_grass(self, Surface):
         for row in range(cell_number):
             for col in range(cell_number):
                 grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
                 Surface.blit(sprite_cell, grass_rect)
-
-    def game_over(self):
-        pygame.quit()

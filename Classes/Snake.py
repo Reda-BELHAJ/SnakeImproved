@@ -7,7 +7,7 @@ cell_number = 38
 
 class Block:
     def __init__(self, x, y) -> None:
-        self.sprite = pygame.image.load("Assets/Block.png")
+        self.sprite = pygame.image.load("Assets/Block.png").convert_alpha()
         self.rect = pygame.Rect(int(x * cell_size), int(y * cell_size), cell_size, cell_size)
 
 class Snake:

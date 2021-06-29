@@ -9,7 +9,7 @@ cell_number = 38
 
 class Bomb:
     def __init__(self) -> None:
-        # self.sprite = pygame.image.load("Assets/" + image).convert_alpha()
+        self.sprite = pygame.image.load("Assets/" + image).convert_alpha()
         self.randomize()
 
     def randomize(self):
@@ -19,5 +19,5 @@ class Bomb:
     
     def draw_bomb(self, Surface):
         self.bomb_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
-        pygame.draw.rect(Surface, pygame.Color('Red'), self.bomb_rect)
-        # Surface.blit(self.sprite, coin_rect)
+        # pygame.draw.rect(Surface, pygame.Color('Red'), self.bomb_rect)
+        Surface.blit(self.sprite, self.bomb_rect)
