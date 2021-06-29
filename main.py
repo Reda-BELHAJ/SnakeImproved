@@ -9,11 +9,10 @@ SCREEN_HEIGHT = 800
 
 SCREEN_UPDATE = pygame.USEREVENT
 
-GREY = (64, 64, 64)
 RED = (128, 0, 0)
 WHITE = (255, 255, 255)
-YELLOW = (255, 255, 0)
 DARK_GREEN = (63, 70, 39)
+LIGHT_GREEN = (213, 212, 184)
 BLACK = (0, 0, 0)
 
 
@@ -80,7 +79,7 @@ if __name__ == '__main__':
     while game.playing:
         clock.tick(60)
         screen.fill(BLACK)
-        display.fill(DARK_GREEN)
+        # display.fill(LIGHT_GREEN)
 
         if game.game_over:
             break
