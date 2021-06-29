@@ -9,7 +9,7 @@ cell_number = 38
 coins = []
 
 for i in range(5):
-    coins.append(pygame.image.load("Assets/Coin"+ str(int(i + 1)) +".png"))
+    coins.append(pygame.image.load("Assets/Coin/Coin"+ str(int(i + 1)) +".png"))
 
 class Coin(Sprite):
     def __init__(self, mode) -> None:
