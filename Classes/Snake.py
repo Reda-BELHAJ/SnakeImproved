@@ -28,7 +28,7 @@ class Snake:
                 Surface.blit(b.sprite, block_rect)
             elif self.mode == 1:
                 Surface.blit(b.sprite, block_rect)
-                # It has to go blood
+                # It has to go blood Colorfull Snake
             
 
     def move_snake(self):

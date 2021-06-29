@@ -24,4 +24,4 @@ class Bomb:
             pygame.draw.rect(Surface, pygame.Color('Red'), self.bomb_rect)
         elif self.mode == 1:
             Surface.blit(self.sprite, self.bomb_rect)
-            # Change the image asset
+            # Change the image asset Animated Bomb
