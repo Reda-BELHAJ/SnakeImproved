@@ -2,6 +2,7 @@ import pygame
 from pygame.math import Vector2
 from Classes.GAME import GAME
 from Classes.Particle import Particle
+from Classes.Menu import Menu
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -14,6 +15,7 @@ WHITE = (255, 255, 255)
 YELLOW = (255, 255, 0)
 DARK_GREEN = (25, 89, 42)
 BLACK = (0, 0, 0)
+
 
 def animate(timer, particles_anim, index, color):
     particles_anim.append(Particle(game.anim_pos[index].x, game.anim_pos[index].y, color))
@@ -40,8 +42,11 @@ if __name__ == '__main__':
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
 
+    font = pygame.font.SysFont(None, 20)
+
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
+    menu = Menu(font, "main menu", WHITE)
     game = GAME()
     particles_anim =  []
 
@@ -51,49 +56,67 @@ if __name__ == '__main__':
 
     while running:
         screen.fill(BLACK)
-        display.fill(DARK_GREEN)
 
-        for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    running = False
-                    break
-                if event.key == pygame.K_UP:
-                    if game.snake.direction.y != 1:
-                        game.snake.direction = Vector2(0, -1)
-                if event.key == pygame.K_DOWN:
-                    if game.snake.direction.y != -1:
-                        game.snake.direction = Vector2(0, 1)
-                if event.key == pygame.K_LEFT:
-                    if game.snake.direction.x != 1:
-                        game.snake.direction = Vector2(-1, 0)
-                if event.key == pygame.K_RIGHT:
-                    if game.snake.direction.x != -1:
-                        game.snake.direction = Vector2(1, 0)
-                    
-            if event.type == pygame.QUIT:
-                running = False
-                break
-            if event.type == SCREEN_UPDATE:
-                game.update()
+        menu.draw_text(20, 20, screen)
 
-        game.draw_elements(display)
-
-        if game.anim_pos[0] != Vector2(-1,-1) :
-            timer, particles_anim = animate(timer, particles_anim, 0, pygame.Color('Green'))
-
-        if game.anim_pos[1] != Vector2(-1,-1) :
-            timer, particles_anim = animate(timer, particles_anim, 1, pygame.Color('Red'))
-
-        # Collision with the small box in rocket with the snake 
-        # le trou: Feature
-        # UI
-
-        screen.blit(display, (100, 100))
-        
         pygame.display.update()
         pygame.display.flip()
 
-        clock.tick(60)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    running = False
+                    break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                        running = False
+                        break
+                if event.key == pygame.K_RETURN:
+                    game.playing = True
+
+        while game.playing:
+            clock.tick(60)
+            screen.fill(BLACK)
+            display.fill(DARK_GREEN)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    running = False
+                    game.playing = False
+                    break
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        running = False
+                        game.playing = False
+                        break
+                    if event.key == pygame.K_UP:
+                        if game.snake.direction.y != 1:
+                            game.snake.direction = Vector2(0, -1)
+                    if event.key == pygame.K_DOWN:
+                        if game.snake.direction.y != -1:
+                            game.snake.direction = Vector2(0, 1)
+                    if event.key == pygame.K_LEFT:
+                        if game.snake.direction.x != 1:
+                            game.snake.direction = Vector2(-1, 0)
+                    if event.key == pygame.K_RIGHT:
+                        if game.snake.direction.x != -1:
+                            game.snake.direction = Vector2(1, 0)
+                        
+                if event.type == SCREEN_UPDATE:
+                    game.update()
+
+            game.draw_elements(display)
+
+            if game.anim_pos[0] != Vector2(-1,-1) :
+                timer, particles_anim = animate(timer, particles_anim, 0, pygame.Color('Green'))
+
+            if game.anim_pos[1] != Vector2(-1,-1) :
+                timer, particles_anim = animate(timer, particles_anim, 1, pygame.Color('Red'))
+
+            # le trou: Feature
+            # UI
+
+            screen.blit(display, (100, 100))
+            
+            pygame.display.update()
+            pygame.display.flip()
 
     pygame.quit()
