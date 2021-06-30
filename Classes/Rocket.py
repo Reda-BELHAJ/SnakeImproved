@@ -8,8 +8,15 @@ cell_number = 38
 class Rocket:
     def __init__(self, mode) -> None:
         self.mode = mode
+        self.sprite = self.sprite()
         self.randomize()
         self.acc = 0.05
+
+    def sprite(self):
+        if self.mode == 0:
+            return pygame.image.load("Assets/Spear.png")
+        elif self.mode == 1:
+            return pygame.image.load("Assets/Spear.png")
 
     def randomize(self):
         self.x = random.randint(0, cell_number - 1)
@@ -26,7 +33,9 @@ class Rocket:
         self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
 
         if self.mode == 0:
-            pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
+            for i in range(3):
+                rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + i * cell_size, cell_size, cell_size)
+                Surface.blit(self.sprite, rect)
+            
         elif self.mode == 1:
             pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
-            # It has to go blood
