@@ -45,6 +45,12 @@ class GAME():
         self.snake.move_snake()
         self.check_collision()
         self.check_fail()
+        self.rem_rockets()
+    
+    def rem_rockets(self):
+        for rocket in self.rockets:
+            if not rocket.out_of_frame():
+                self.rockets.remove(rocket)
     
     def check_timer(self):
         if self.count >= self.crowd:

@@ -26,9 +26,12 @@ class Rocket:
     def move(self):
         self.y += 1 * self.acc
         self.position = Vector2(self.x, self.y)
+
+    def out_of_frame(self):
+        return self.position.y * cell_size <= 800
     
     def draw_rocket(self, Surface):
-        if self.position.y * cell_size <= 800:
+        if self.out_of_frame():
             self.move()
             self.rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
             self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
