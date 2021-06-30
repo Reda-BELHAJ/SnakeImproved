@@ -13,7 +13,7 @@ bg = pygame.image.load("Assets/BG.png")
 
 class GAME():
     def __init__(self, mode) -> None:
-        self.playing = False
+        self.playing = 0
 
         self.mode = mode
         # Classic mode 

@@ -1,5 +1,4 @@
 import pygame
-from pygame.math import Vector2
 
 class Menu:
     def __init__(self, font, text, color) -> None:

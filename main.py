@@ -59,7 +59,7 @@ if __name__ == '__main__':
 
     timer = 0
 
-    running = True
+    running = 1
 
     while running:
         screen.fill(BLACK)
@@ -71,15 +71,15 @@ if __name__ == '__main__':
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                    running = False
+                    running = 0
                     break
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                        running = False
+                        running = 0
                         break
                 if event.key == pygame.K_RETURN:
-                    game.playing = True
-                    running = False
+                    game.playing = 1
+                    running = 0
                     break
 
     while game.playing:
