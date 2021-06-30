@@ -9,11 +9,12 @@ SCREEN_HEIGHT = 800
 
 SCREEN_UPDATE = pygame.USEREVENT
 
-RED = (128, 0, 0)
 WHITE = (255, 255, 255)
 DARK_GREEN = (63, 70, 39)
 LIGHT_GREEN = (213, 212, 184)
 BLACK = (0, 0, 0)
+RED = (207, 104, 84)
+GOLD = (255, 159, 0)
 
 
 def animate(timer, particles_anim, index):
@@ -46,10 +47,13 @@ if __name__ == '__main__':
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     menu = Menu(font, "main menu", WHITE)
-    game = GAME(1)
+    game = GAME(0)
 
     particles_anim =  []
-    colors = [DARK_GREEN, pygame.Color('Red'), pygame.Color('Gold')]
+    if game.mode == 1:
+        colors = [DARK_GREEN, RED, GOLD]
+    else:
+        colors = [DARK_GREEN] * 3
 
     timer = 0
 

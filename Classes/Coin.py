@@ -14,12 +14,16 @@ for i in range(5):
 class Coin(Sprite):
     def __init__(self, mode) -> None:
         self.mode = mode
-        self.sprite = coins[0]
+        self.sprite = self.sprite()
         super().__init__()
         self.current_sprite = -1 
         self.randomize()
 
-    # Change the color on the animation gold to rgb an
+    def sprite(self):
+        if self.mode == 0:
+            return pygame.image.load("Assets/Coin.png")
+        elif self.mode == 1:
+            return coins[0]
 
     def randomize(self):
         self.x = random.randint(1, cell_number - 2)
@@ -32,10 +36,9 @@ class Coin(Sprite):
         if self.current_sprite >= len(coins):
             self.current_sprite = -1 
 
-        self.sprite = coins[int(self.current_sprite)]
         self.coin_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
 
-        if self.mode == 0:
-            pygame.draw.rect(Surface, pygame.Color('Gold'), self.coin_rect)
-        elif self.mode == 1:   
-            Surface.blit(self.sprite, self.coin_rect)
+        if self.mode == 1:   
+            self.sprite = coins[int(self.current_sprite)]
+        
+        Surface.blit(self.sprite, self.coin_rect)

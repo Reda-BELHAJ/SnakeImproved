@@ -2,7 +2,7 @@ import pygame
 import random
 from pygame.math import Vector2
 
-image = "bomb.png"
+image = "Bomb.png"
 
 cell_size = 16
 cell_number = 38
@@ -21,7 +21,7 @@ class Bomb:
 
     def sprite(self):
         if self.mode == 0:
-            return pygame.image.load("Assets/" + image).convert_alpha()
+            return pygame.image.load("Assets/Bomb.png")
         elif self.mode == 1:
             return bombs[0]
     
@@ -35,13 +35,11 @@ class Bomb:
 
         if self.current_sprite >= len(bombs):
             self.current_sprite = -1 
-            
+
         self.bomb_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size)
 
-        self.sprite = bombs[int(self.current_sprite)]
-
-        if self.mode == 0:
-            Surface.blit(self.sprite, self.bomb_rect)
-        elif self.mode == 1:
-            Surface.blit(self.sprite, self.bomb_rect)
-            # Change the image asset Animated Bomb
+        if self.mode == 1:
+            self.sprite = bombs[int(self.current_sprite)]
+        
+        Surface.blit(self.sprite, self.bomb_rect)
+        # Change the image asset Animated Bomb
