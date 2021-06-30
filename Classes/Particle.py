@@ -3,7 +3,7 @@ import random
 from pygame.math import Vector2
 
 cell_size = 16
-cell_number = 38
+cell_number = 30
 
 class Particle:
     def __init__(self, x, y, color) -> None:

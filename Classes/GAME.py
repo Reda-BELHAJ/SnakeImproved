@@ -6,9 +6,10 @@ from .Rocket import Rocket
 from pygame.math import Vector2
 
 cell_size = 16
-cell_number = 38
+cell_number = 30
 
 sprite_cell = pygame.image.load("Assets/Cell.png")
+bg = pygame.image.load("Assets/BG.png")
 
 class GAME():
     def __init__(self, mode) -> None:
@@ -54,7 +55,8 @@ class GAME():
 
     def draw_elements(self, screen):
         if self.mode == 0:
-            self.draw_grass(screen)
+            screen.blit(bg, (0, 0))
+            
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()
@@ -115,9 +117,3 @@ class GAME():
         for bomb in self.bombs:
             if bomb.position == self.snake.body[0]:
                 self.game_over = True
-                    
-    def draw_grass(self, Surface):
-        for row in range(cell_number):
-            for col in range(cell_number):
-                grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
-                Surface.blit(sprite_cell, grass_rect)

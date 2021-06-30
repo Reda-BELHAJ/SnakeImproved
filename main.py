@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 from pygame.math import Vector2
 from Classes.GAME import GAME
 from Classes.Particle import Particle
@@ -37,7 +38,8 @@ if __name__ == '__main__':
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-    display = pygame.Surface((608, 608))
+    display = pygame.Surface((608, 608),HWSURFACE|DOUBLEBUF|RESIZABLE)
+    fake_display = pygame.Surface((480, 480))
 
     clock  = pygame.time.Clock()
     pygame.display.set_caption('Snake Game')
@@ -84,6 +86,7 @@ if __name__ == '__main__':
         clock.tick(60)
         screen.fill(BLACK)
         display.fill(LIGHT_GREEN)
+        fake_display.fill(LIGHT_GREEN)
 
         if game.game_over:
             break
@@ -114,7 +117,7 @@ if __name__ == '__main__':
             if event.type == SCREEN_UPDATE:
                 game.update()
 
-        game.draw_elements(display)
+        game.draw_elements(fake_display)
 
         for i, anim in enumerate(game.anim_pos):
             if anim != Vector2(-1,-1) :
@@ -123,9 +126,9 @@ if __name__ == '__main__':
         # le trou: Feature
         # UI
 
-        screen.blit(display, (100, 100))
         
-        pygame.display.update()
+        display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
+        screen.blit(display, (100, 100))
         pygame.display.flip()
 
     pygame.quit()

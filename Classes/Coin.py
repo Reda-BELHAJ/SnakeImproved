@@ -4,7 +4,7 @@ from pygame.math import Vector2
 from pygame.sprite import Sprite
 
 cell_size = 16
-cell_number = 38
+cell_number = 30
 
 coins = []
 

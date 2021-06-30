@@ -3,7 +3,7 @@ import random
 from pygame.math import Vector2
 
 cell_size = 16
-cell_number = 38
+cell_number = 30
 
 class Rocket:
     def __init__(self, mode) -> None:
