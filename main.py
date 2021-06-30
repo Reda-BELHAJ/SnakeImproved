@@ -49,7 +49,7 @@ if __name__ == '__main__':
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     menu = Menu(font, "main menu", WHITE)
-    game = GAME(0)
+    game = GAME(1)
 
     particles_anim =  []
     if game.mode == 1:
