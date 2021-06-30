@@ -1,6 +1,6 @@
 import pygame
 
-sprite_cell = pygame.image.load("Cell.png")
+sprite_cell = pygame.image.load("Classes/Util/floor_1.png")
 
 def draw_grass(Surface):
         for row in range(30):
@@ -10,4 +10,4 @@ def draw_grass(Surface):
 
 finsurf = pygame.Surface((480, 480), pygame.SRCALPHA)
 draw_grass(finsurf)
-pygame.image.save(finsurf, "BG.png")
+pygame.image.save(finsurf, "Assets/BG2.png")

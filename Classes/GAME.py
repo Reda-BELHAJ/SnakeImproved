@@ -10,6 +10,7 @@ cell_number = 30
 
 sprite_cell = pygame.image.load("Assets/Cell.png")
 bg = pygame.image.load("Assets/BG.png")
+bg2 = pygame.image.load("Assets/BG2.png")
 
 class GAME():
     def __init__(self, mode) -> None:
@@ -62,7 +63,8 @@ class GAME():
     def draw_elements(self, screen):
         if self.mode == 0:
             screen.blit(bg, (0, 0))
-
+        elif self.mode == 1:
+            screen.fill((155, 199, 167))
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()

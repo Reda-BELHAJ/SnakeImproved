@@ -85,7 +85,6 @@ if __name__ == '__main__':
     while game.playing:
         clock.tick(60)
         screen.fill(BLACK)
-        display.fill(LIGHT_GREEN)
         fake_display.fill(LIGHT_GREEN)
 
         if game.game_over:
