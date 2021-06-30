@@ -126,7 +126,7 @@ if __name__ == '__main__':
                 timer, particles_anim = animate(timer, particles_anim, i)
 
         # le trou: Feature
-        # UI
+        # UI: https://www.google.com/search?q=pixel+art+menu&rlz=1C1GCEU_frMA944MA944&sxsrf=ALeKk02u4Qtil2TGbjwxKOsU-lPciU8Abg:1625050574172&tbm=isch&source=iu&ictx=1&fir=X_BH_TOfYgFIkM%252CAKCzOW1gFl7JpM%252C_&vet=1&usg=AI4_-kQjVWo_BT0KmTHyj4xMmU5LGCq8Ow&sa=X&ved=2ahUKEwilqtyRmb_xAhUS7eAKHaIPADYQ9QF6BAgKEAE&biw=1920&bih=969#imgrc=g29W0LdlSlspgM
 
         
         display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
