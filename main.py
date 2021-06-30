@@ -38,7 +38,7 @@ if __name__ == '__main__':
     pygame.init()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
-    display = pygame.Surface((608, 608),HWSURFACE|DOUBLEBUF|RESIZABLE)
+    display = pygame.Surface((700, 700),HWSURFACE|DOUBLEBUF|RESIZABLE)
     fake_display = pygame.Surface((480, 480))
 
     clock  = pygame.time.Clock()
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                     break
 
     while game.playing:
-        clock.tick(60)
+        # clock.tick(60)
         screen.fill(BLACK)
         display.fill(LIGHT_GREEN)
         fake_display.fill(LIGHT_GREEN)
@@ -130,7 +130,7 @@ if __name__ == '__main__':
 
         
         display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
-        screen.blit(display, (100, 100))
+        screen.blit(display, (50, 50))
         pygame.display.flip()
 
     pygame.quit()

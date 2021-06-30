@@ -28,14 +28,15 @@ class Rocket:
         self.position = Vector2(self.x, self.y)
     
     def draw_rocket(self, Surface):
-        self.move()
-        self.rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
-        self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
+        if self.position.y * cell_size <= 800:
+            self.move()
+            self.rocket_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size), cell_size, cell_size * 3)
+            self.small_rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + cell_size + cell_size, cell_size, cell_size)
 
-        if self.mode == 0:
-            for i in range(3):
-                rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + i * cell_size, cell_size, cell_size)
-                Surface.blit(self.sprite, rect)
-            
-        elif self.mode == 1:
-            pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)
+            if self.mode == 0:
+                for i in range(3):
+                    rect = pygame.Rect(int(self.position.x * cell_size), int(self.position.y * cell_size) + i * cell_size, cell_size, cell_size)
+                    Surface.blit(self.sprite, rect)
+                
+            elif self.mode == 1:
+                pygame.draw.rect(Surface, pygame.Color('Black'), self.rocket_rect)

@@ -56,7 +56,7 @@ class GAME():
     def draw_elements(self, screen):
         if self.mode == 0:
             screen.blit(bg, (0, 0))
-            
+
         self.coin.draw_coin(screen)
         self.snake.draw_snake(screen)
         self.check_timer()
