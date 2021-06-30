@@ -49,7 +49,7 @@ if __name__ == '__main__':
     pygame.time.set_timer(SCREEN_UPDATE, 150)
 
     menu = Menu(font, "main menu", WHITE)
-    game = GAME(1)
+    game = GAME(0)
 
     particles_anim =  []
     if game.mode == 1:
@@ -124,9 +124,15 @@ if __name__ == '__main__':
             if anim != Vector2(-1,-1) :
                 timer, particles_anim = animate(timer, particles_anim, i)
 
-        # le trou: Feature
-        # UI: https://www.google.com/search?q=pixel+art+menu&rlz=1C1GCEU_frMA944MA944&sxsrf=ALeKk02u4Qtil2TGbjwxKOsU-lPciU8Abg:1625050574172&tbm=isch&source=iu&ictx=1&fir=X_BH_TOfYgFIkM%252CAKCzOW1gFl7JpM%252C_&vet=1&usg=AI4_-kQjVWo_BT0KmTHyj4xMmU5LGCq8Ow&sa=X&ved=2ahUKEwilqtyRmb_xAhUS7eAKHaIPADYQ9QF6BAgKEAE&biw=1920&bih=969#imgrc=g29W0LdlSlspgM
-
+        # Feature
+        # # le trou
+        # # StopWatch
+        # UI: 
+        # # Menu and the count and other stuff
+        # # https://www.google.com/search?q=pixel+art+menu&rlz=1C1GCEU_frMA944MA944&sxsrf=ALeKk02u4Qtil2TGbjwxKOsU-lPciU8Abg:1625050574172&tbm=isch&source=iu&ictx=1&fir=X_BH_TOfYgFIkM%252CAKCzOW1gFl7JpM%252C_&vet=1&usg=AI4_-kQjVWo_BT0KmTHyj4xMmU5LGCq8Ow&sa=X&ved=2ahUKEwilqtyRmb_xAhUS7eAKHaIPADYQ9QF6BAgKEAE&biw=1920&bih=969#imgrc=g29W0LdlSlspgM
+        # Countdown UI
+        # animation when hit the bomb
+        # Sprite for the snake in the colorfull mode
         
         display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
         screen.blit(display, (50, 50))
