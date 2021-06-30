@@ -23,7 +23,7 @@ def animate(timer, particles_anim, index):
     timer += 1
     if timer < 30:
         for particle in particles_anim:
-            particle.draw(display)
+            particle.draw(fake_display)
             if particle.radius <= 0:
                 particles_anim.remove(particle)
     else:
@@ -96,6 +96,8 @@ if __name__ == '__main__':
                 running = False
                 game.playing = False
                 break
+            if event.type == VIDEORESIZE:
+                display = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
