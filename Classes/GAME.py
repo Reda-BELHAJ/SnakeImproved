@@ -44,7 +44,7 @@ class GAME():
 
     def refresh(self, mode):
         self.__init__(mode)
-        return 1, 0
+        return  1, 0
 
     def update(self):
         self.snake.move_snake()

@@ -128,13 +128,10 @@ if __name__ == '__main__':
         colors = [DARK_GREEN] * 3
 
     timer = 0
-
     running = 1
 
-    for i in range(2):
+    while running:
         running, game.playing = menu_screen(running, game.playing)
-        print(f"running: {running}, game.playing: {game.playing}")
         running, game.playing = game_loop(running, game.playing, game.mode, fake_display, display)
-        print(f"running: {running}, game.playing: {game.playing}")
 
     pygame.quit()
