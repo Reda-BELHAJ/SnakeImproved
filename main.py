@@ -42,7 +42,7 @@ def menu_screen(running, playing):
     
     return running, playing
 
-def game_loop(running, playing, mode, fake_display, display):
+def game_loop(timer, particles_anim, running, playing, mode, fake_display, display):
     while playing:
         clock.tick(60)
         screen.fill(BLACK)
@@ -60,6 +60,10 @@ def game_loop(running, playing, mode, fake_display, display):
             if event.type == VIDEORESIZE:
                 display = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = 1
+                    playing = 0
+                    break
                 if event.key == pygame.K_UP:
                     if game.snake.direction.y != 1:
                         game.snake.direction = Vector2(0, -1)
@@ -117,6 +121,7 @@ if __name__ == '__main__':
     font = pygame.font.SysFont(None, 30)
 
     pygame.time.set_timer(SCREEN_UPDATE, 150)
+    countdown = 5
 
     menu = Menu(font, "main menu", WHITE)
     game = GAME(0)
@@ -131,7 +136,10 @@ if __name__ == '__main__':
     running = 1
 
     while running:
-        running, game.playing = menu_screen(running, game.playing)
-        running, game.playing = game_loop(running, game.playing, game.mode, fake_display, display)
+        if not game.playing:
+            running, game.playing = menu_screen(running, game.playing)
+        print(f"running: {running}, game.playing: {game.playing}")
+        running, game.playing = game_loop(timer, particles_anim, running, game.playing, game.mode, fake_display, display)
+        print(f"running: {running}, game.playing: {game.playing}")
 
     pygame.quit()

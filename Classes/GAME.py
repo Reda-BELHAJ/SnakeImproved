@@ -44,7 +44,7 @@ class GAME():
 
     def refresh(self, mode):
         self.__init__(mode)
-        return  1, 0
+        return  1, 1
 
     def update(self):
         self.snake.move_snake()
@@ -116,16 +116,16 @@ class GAME():
 
     def check_fail(self):
         if not 0 <= self.snake.body[0].x < cell_number or not 0 <= self.snake.body[0].y < cell_number:
-            self.game_over = True
+            self.game_over = 1
         
         for block in self.snake.body[1:] :
             if block == self.snake.body[0]:
-                self.game_over = True
+                self.game_over = 1
 
         for rocket in self.rockets:
             if rocket.rocket_rect.colliderect(Block(self.snake.body[0].x, self.snake.body[0].y).rect):
-                self.game_over = True
+                self.game_over = 1
 
         for bomb in self.bombs:
             if bomb.position == self.snake.body[0]:
-                self.game_over = True
+                self.game_over = 1
