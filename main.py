@@ -42,15 +42,14 @@ def menu_screen(running, playing):
     
     return running, playing
 
-def game_loop(running, playing, fake_display, display):
+def game_loop(running, playing, mode, fake_display, display):
     while playing:
         clock.tick(60)
         screen.fill(BLACK)
         fake_display.fill(LIGHT_GREEN)
 
         if game.game_over:
-            running = 1
-            playing = 0
+            running, playing = game.refresh(mode)
             break
 
         for event in pygame.event.get():
@@ -135,7 +134,7 @@ if __name__ == '__main__':
     for i in range(2):
         running, game.playing = menu_screen(running, game.playing)
         print(f"running: {running}, game.playing: {game.playing}")
-        running, game.playing = game_loop(running, game.playing, fake_display, display)
+        running, game.playing = game_loop(running, game.playing, game.mode, fake_display, display)
         print(f"running: {running}, game.playing: {game.playing}")
 
     pygame.quit()

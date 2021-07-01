@@ -42,6 +42,10 @@ class GAME():
         # self.acc = 0.1
         # self.difficulty = 0
 
+    def refresh(self, mode):
+        self.__init__(mode)
+        return 1, 0
+
     def update(self):
         self.snake.move_snake()
         self.check_collision()
