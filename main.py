@@ -138,8 +138,7 @@ if __name__ == '__main__':
     while running:
         if not game.playing:
             running, game.playing = menu_screen(running, game.playing)
-        print(f"running: {running}, game.playing: {game.playing}")
+            
         running, game.playing = game_loop(timer, particles_anim, running, game.playing, game.mode, fake_display, display)
-        print(f"running: {running}, game.playing: {game.playing}")
 
     pygame.quit()
