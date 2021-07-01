@@ -17,6 +17,77 @@ BLACK = (0, 0, 0)
 RED = (207, 104, 84)
 GOLD = (255, 159, 0)
 
+def menu_screen(running, playing):
+    while running:
+        screen.fill(BLACK)
+
+        menu.draw_text(40, 40, screen)
+
+        pygame.display.update()
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                    running = 0
+                    break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = 0
+                    playing = 1
+                    break
+                if event.key == pygame.K_RETURN:
+                    playing = 1
+                    running = 0
+                    break
+    
+    return running, playing
+
+def game_loop(running, playing, fake_display, display):
+    while playing:
+        clock.tick(60)
+        screen.fill(BLACK)
+        fake_display.fill(LIGHT_GREEN)
+
+        if game.game_over:
+            running = 1
+            playing = 0
+            break
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = 0
+                playing = 0
+                break
+            if event.type == VIDEORESIZE:
+                display = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    if game.snake.direction.y != 1:
+                        game.snake.direction = Vector2(0, -1)
+                if event.key == pygame.K_DOWN:
+                    if game.snake.direction.y != -1:
+                        game.snake.direction = Vector2(0, 1)
+                if event.key == pygame.K_LEFT:
+                    if game.snake.direction.x != 1:
+                        game.snake.direction = Vector2(-1, 0)
+                if event.key == pygame.K_RIGHT:
+                    if game.snake.direction.x != -1:
+                        game.snake.direction = Vector2(1, 0)
+                    
+            if event.type == SCREEN_UPDATE:
+                game.update()
+
+        game.draw_elements(fake_display)
+
+        for i, anim in enumerate(game.anim_pos):
+            if anim != Vector2(-1,-1) :
+                timer, particles_anim = animate(timer, particles_anim, i)
+        
+        display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
+        screen.blit(display, (50, 50))
+        pygame.display.flip()
+    
+    return running, playing
 
 def animate(timer, particles_anim, index):
     particles_anim.append(Particle(game.anim_pos[index].x, game.anim_pos[index].y, colors[index]))
@@ -61,81 +132,10 @@ if __name__ == '__main__':
 
     running = 1
 
-    while running:
-        screen.fill(BLACK)
-
-        menu.draw_text(40, 40, screen)
-
-        pygame.display.update()
-        pygame.display.flip()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                    running = 0
-                    break
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                        running = 0
-                        break
-                if event.key == pygame.K_RETURN:
-                    game.playing = 1
-                    running = 0
-                    break
-
-    while game.playing:
-        clock.tick(60)
-        screen.fill(BLACK)
-        fake_display.fill(LIGHT_GREEN)
-
-        if game.game_over:
-            break
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-                game.playing = False
-                break
-            if event.type == VIDEORESIZE:
-                display = pygame.display.set_mode(event.size, HWSURFACE|DOUBLEBUF|RESIZABLE)
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    running = False
-                    game.playing = False
-                    break
-                if event.key == pygame.K_UP:
-                    if game.snake.direction.y != 1:
-                        game.snake.direction = Vector2(0, -1)
-                if event.key == pygame.K_DOWN:
-                    if game.snake.direction.y != -1:
-                        game.snake.direction = Vector2(0, 1)
-                if event.key == pygame.K_LEFT:
-                    if game.snake.direction.x != 1:
-                        game.snake.direction = Vector2(-1, 0)
-                if event.key == pygame.K_RIGHT:
-                    if game.snake.direction.x != -1:
-                        game.snake.direction = Vector2(1, 0)
-                    
-            if event.type == SCREEN_UPDATE:
-                game.update()
-
-        game.draw_elements(fake_display)
-
-        for i, anim in enumerate(game.anim_pos):
-            if anim != Vector2(-1,-1) :
-                timer, particles_anim = animate(timer, particles_anim, i)
-
-        # Feature
-        # # le trou
-        # # StopWatch
-        # UI: 
-        # # Menu and the count and other stuff
-        # # https://www.google.com/search?q=pixel+art+menu&rlz=1C1GCEU_frMA944MA944&sxsrf=ALeKk02u4Qtil2TGbjwxKOsU-lPciU8Abg:1625050574172&tbm=isch&source=iu&ictx=1&fir=X_BH_TOfYgFIkM%252CAKCzOW1gFl7JpM%252C_&vet=1&usg=AI4_-kQjVWo_BT0KmTHyj4xMmU5LGCq8Ow&sa=X&ved=2ahUKEwilqtyRmb_xAhUS7eAKHaIPADYQ9QF6BAgKEAE&biw=1920&bih=969#imgrc=g29W0LdlSlspgM
-        # Countdown UI
-        # animation when hit the bomb
-        # Sprite for the snake in the colorfull mode
-        
-        display.blit(pygame.transform.scale(fake_display, display.get_rect().size), (0, 0))
-        screen.blit(display, (50, 50))
-        pygame.display.flip()
+    for i in range(2):
+        running, game.playing = menu_screen(running, game.playing)
+        print(f"running: {running}, game.playing: {game.playing}")
+        running, game.playing = game_loop(running, game.playing, fake_display, display)
+        print(f"running: {running}, game.playing: {game.playing}")
 
     pygame.quit()
